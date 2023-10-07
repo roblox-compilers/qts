@@ -8,7 +8,7 @@ except FileNotFoundError:
     sys.exit(1)
 args = sys.argv[1:]
 flags = []
-inputf = None
+inputf = []
 outputf = None
 lookForOutput = False
 for arg in args:
@@ -16,17 +16,19 @@ for arg in args:
         lookForOutput = True
     elif arg.startswith("-"):
         flags.append(arg)
-    elif inputf is None:
-        inputf = arg
     elif lookForOutput:
         outputf = arg
         lookForOutput = False
     else:
-        error("too many arguments")
-        sys.exit(1)
-if inputf is None:
+        inputf.append(arg)
+if inputf is []:
     error("no input file")
     sys.exit(1)
+elif len(inputf) > 1:
+    error("too many input files")
+    sys.exit(1)
+else:
+    inputf = inputf[0]
 if outputf is None:
     error("no output file")
     sys.exit(1)
