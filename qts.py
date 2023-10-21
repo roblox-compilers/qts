@@ -14,6 +14,10 @@ lookForOutput = False
 for arg in args:
     if arg == "-o":
         lookForOutput = True
+    elif arg == "-v":
+        print("qts")
+        print("rbxtsc version " + version)
+        sys.exit(0)
     elif arg.startswith("-"):
         flags.append(arg)
     elif lookForOutput:
