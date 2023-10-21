@@ -63,7 +63,10 @@ for i, v in enumerate(flags):
             file.write(contents)
             file.close()
             
-subprocess.run(["rbxtsc"], cwd = "qtstemp")
+suc = subprocess.run(["rbxtsc"], cwd = "qtstemp", shell = True)
+if suc.returncode != 0:
+    error("rbxtsc failed")
+    sys.exit(1)
 runtimeLib = open("qtstemp/include/RuntimeLib.lua", "r").read()
 luaCode = open("qtstemp/out/init.server.lua", "r").read()
 file = open(outputf, "w")
